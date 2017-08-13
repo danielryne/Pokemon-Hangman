@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Pokemon Hangman</title>
+
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <img src="./assets/images/banner.gif" alt="pokeball">
+      </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="col-md-8">
+
+      <div id="pagename" class="page-header">
+        <h1>Who's that pokemon? <img src="./assets/images/pokeballshake.gif" alt="pokeball"></h1>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p>A pokemon fangame in the style of hangman. Guess the pokemon's name with no more than 4 bad guesses and you'll catch the pokemon. Keep trying to catch'em all!</p>
+          <br>
+        </div>
+        
+        <div class="col-md-12">
+          <h1 id="word" align="center"></h1>
+          <br>
+          <br>
+          <h2 id="gamestatus"> </h2>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Your Guess</h3>
+        </div>
+
+        <div class="panel-body">
+          <p id="letterguess">-</p> <!-- User guess goes here --> 
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Guesses Remaining</h3>
+        </div>
+
+        <div class="panel-body">
+          <p id="badguess">4</p> <!-- Number of bad guesses go here --> 
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Captures</h3>
+        </div>
+
+        <div class="panel-body">
+          <p id="caught">0</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Pokemon Caught</h3> <!-- List of all the pokemon caught --> 
+        </div>
+
+        <div class="panel-body">
+          <p id="captured"></p> <!-- User guess goes here --> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+  	<div class="row">
+		<footer class="footer">
+	   		<div class="container">
+	   			<p>© Copyright 2017 Daniel Ryne Lucio</p>
+	    	</div>
+		</footer>
+  	</div>
+  </div>
+
+  <!-- jQuery CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Bootstrap JavaScript CDN -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+  <script type="text/javascript" src="./assets/javascript/game.js"></script>
+
+</body>
+
+</html>

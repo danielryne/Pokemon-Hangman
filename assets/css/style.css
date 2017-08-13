@@ -1,0 +1,34 @@
+
+.navbar-header {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  background-color: #ed1c24;
+}
+
+#pagename, #gamestatus {
+  color: gray;
+  text-align: center; 
+}
+
+.panel-title, .panel-body {
+  text-align: center; 
+  }
+
+.col-md-3 {
+  font-size: 30px;
+}
+
+.footer {
+    width: 100%;
+    height: 60px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    background-color: #ed1c24;
+  }
+
+
+
+
