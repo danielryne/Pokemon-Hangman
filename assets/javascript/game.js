@@ -7,6 +7,7 @@
     
     //chooses a random word from the word bank 
     var word = wordbank[Math.floor(Math.random() * wordbank.length)];
+    word = word.toLowerCase(); //changes all choises to lower case
     console.log(word); //hint - sends word to console
 
     //variable for the length of the word
@@ -24,7 +25,8 @@
     document.getElementById("word").innerHTML = wordletters.join(' ');
 
     //variable to keep track of the number of bad guesses
-    var badguess = 4; 
+    var badguess = 5;
+    document.getElementById("badguess").innerHTML = badguess;
 
     //variable to keep track of mismatches
     var mismatch = 0;
@@ -43,6 +45,7 @@
 
     // Determines which key was pressed.
     var userguess = event.key; 
+    useguess = word.toLowerCase(); //converts user choice to lower cse letters
     document.getElementById("letterguess").innerHTML = userguess;
 
     //loop to check the user selection against all letters  
@@ -76,6 +79,8 @@
       
       //resets the game with new word, variables are also reset
       word = wordbank[Math.floor(Math.random() * wordbank.length)]; //gets new word
+      word = word.toLowerCase(); //changes all choises to lower case
+      console.log(word); //hint - sends word to console
       wordletters.length = word.length; //reset array
       wordlength = word.length; //resets word length
       wordletters = word.split(); //splits word into array
@@ -85,7 +90,7 @@
       }
       document.getElementById("word").innerHTML = wordletters.join(' '); //prints blanks
       
-      badguess = 4; //reset variable 
+      badguess = 5; //reset variable 
       document.getElementById("badguess").innerHTML = badguess;
 
       goodguess = false; //reset variable 
@@ -116,6 +121,8 @@
 
       //resets the game with new word, variables are also reset
       word = wordbank[Math.floor(Math.random() * wordbank.length)]; //gets new word
+      word = word.toLowerCase(); //changes all choises to lower case
+      console.log(word); //hint - sends word to console
       wordletters.length = word.length; //reset array
       wordlength = word.length; //resets word length
       wordletters = word.split(); //splits word into array
@@ -125,7 +132,7 @@
       }
       document.getElementById("word").innerHTML = wordletters.join(' '); //prints blanks
       
-      badguess = 4; //reset variable 
+      badguess = 5; //reset variable 
       document.getElementById("badguess").innerHTML = badguess;
 
       goodguess = false; //reset variable 
