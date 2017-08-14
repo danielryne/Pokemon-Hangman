@@ -2,6 +2,9 @@
     //array of pokemon captured, starts off empty
     var captured = [];
 
+    //array to keep track of guesses
+    var guesses = [];
+
     //array of words to be used for the game (orginal 151 pokemon)
     var wordbank = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle", "Wartortle","Blastoise",'Caterpie','Metapod','Butterfree','Weedle','Kakuna','Beedrill','Pidgey','Pidgeotto','Pidgeot','Rattata','Raticate','Spearow','Fearow','Ekans','Arbok','Pikachu','Raichu','Sandshrew','Sandslash','Nidorina','Nidoqueen','Nidorino','Nidoking','Clefairy','Clefable','Vulpix','Ninetales','Jigglypuff','Wigglytuff','Zubat','Golbat','Oddish','Gloom','Vileplume','Paras','Parasect','Venonat','Venomoth','Diglett','Dugtrio','Meowth','Persian','Psyduck','Golduck','Mankey','Primeape','Growlithe','Arcanine','Poliwag','Poliwhirl','Poliwrath','Abra','Kadabra','Alakazam','Machop','Machoke','Machamp','Bellsprout','Weepinbell','Victreebel','Tentacool','Tentacruel','Geodude','Graveler','Golem','Ponyta','Rapidash','Slowpoke','Slowbro','Magnemite','Magneton','Farfetchd','Doduo','Dodrio','Seel','Dewgong','Grimer','Muk','Shellder','Cloyster','Gastly','Haunter','Gengar','Onix','Drowzee','Hypno','Krabby','Kindler','Voltorb','Electrode','Exeggcute','Exeggutor','Cubone','Marowak','Hitmonlee','Hitmonchan','Lickitung','Koffing','Weezing','Rhyhorn','Rhydon','Chansey','Tangela','Kangaskhan','Horsea','Seadra','Goldeen','Seaking','Staryu','Starmie','MrMime','Scyther','Jynx','Electabuzz','Magmar','Pinsir','Tauros','Magikarp','Gyarados','Lapras','Ditto','Eevee','Vaporeon','Jolteon','Flareon','Porygon','Omanyte','Omastar','Kabuto','Kabutops','Aerodactyl','Snorlax','Articuno','Zapdos','Moltres','Dratini','Dragonair','Dragonite','Mewtwo','Mew'];
     
@@ -45,8 +48,9 @@
 
     // Determines which key was pressed.
     var userguess = event.key; 
-    useguess = word.toLowerCase(); //converts user choice to lower cse letters
-    document.getElementById("letterguess").innerHTML = userguess;
+    useguess = userguess.toLowerCase(); //converts user choice to lower case letters
+    guesses.push(" " + userguess); //adds to list of letters guessed
+    document.getElementById("letterguess").innerHTML = guesses;
 
     //loop to check the user selection against all letters  
     for (i = 0; i < wordlength; i++){
@@ -77,13 +81,15 @@
     if (badguess === 0){
       document.getElementById("gamestatus").innerHTML = "Pokemon ran away! Try again.";
       
-      //resets the game with new word, variables are also reset
+      //resets the game with new word, all variable reset
       word = wordbank[Math.floor(Math.random() * wordbank.length)]; //gets new word
-      word = word.toLowerCase(); //changes all choises to lower case
+      word = word.toLowerCase(); //changes all letters to lower case
       console.log(word); //hint - sends word to console
-      wordletters.length = word.length; //reset array
+      wordletters.length = word.length; //reset array for word
       wordlength = word.length; //resets word length
       wordletters = word.split(); //splits word into array
+      guesses = []; //resets array for guesses
+      document.getElementById("letterguess").innerHTML = guesses; //prints new array
 
       for (i = 0; i < wordlength; i++) { //resets letters in array to blanks
         wordletters[i] = "_";
@@ -119,13 +125,15 @@
       //print the list of pokemon captured
       document.getElementById("captured").innerHTML = captured;
 
-      //resets the game with new word, variables are also reset
+      //resets the game with new word, all variable reset
       word = wordbank[Math.floor(Math.random() * wordbank.length)]; //gets new word
-      word = word.toLowerCase(); //changes all choises to lower case
+      word = word.toLowerCase(); //changes all letters to lower case
       console.log(word); //hint - sends word to console
-      wordletters.length = word.length; //reset array
+      wordletters.length = word.length; //reset array for word
       wordlength = word.length; //resets word length
       wordletters = word.split(); //splits word into array
+      guesses = []; //resets array for guesses
+      document.getElementById("letterguess").innerHTML = guesses; //prints new array
 
       for (i = 0; i < wordlength; i++) { //resets letters in array to blanks
         wordletters[i] = "_";
@@ -137,6 +145,19 @@
 
       goodguess = false; //reset variable 
       mismatch = 0; //reset variable 
+
+      //Adds badges for Pokemon caught!
+      if (caught >= 10){
+        document.getElementById("badges").innerHTML = 
+          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Cascadebadge.png" />';
+        document.getElementById("message").innerHTML = "You've caught 10 pokemon. That earned you the Cascade Badge. Keep going trainer!";
+      }
+      else if (caught >=5){
+        document.getElementById("badges").innerHTML = 
+          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" />';
+        document.getElementById("message").innerHTML = "You've caught 5 pokemon. That earned you the Boulder Badge. Keep going trainer!";
+      }
+
     }
     else{
       mismatch = 0;  //resets the number of mismatched characters to zero
