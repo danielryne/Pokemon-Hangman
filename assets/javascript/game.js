@@ -147,17 +147,46 @@
       mismatch = 0; //reset variable 
 
       //Adds badges for Pokemon caught!
-      if (caught >= 10){
+      if (caught >= 40){
+        document.getElementById("badges").innerHTML = 
+          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Soulbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Marshbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Volcanobadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Earthbadge.png" />';
+        document.getElementById("message").innerHTML = "You've caught 40 pokemon. You've earned the Rainbow Badge. You are truly the very best, like no one ever was!";
+      }
+      else if (caught >= 35){
+        document.getElementById("badges").innerHTML = 
+          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Soulbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Marshbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Volcanobadge.png" />';
+        document.getElementById("message").innerHTML = "You've caught 35 pokemon. You've earned the Volcano Badge. You are almost there!";
+      }
+      else if (caught >= 30){
+        document.getElementById("badges").innerHTML = 
+          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Soulbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Marshbadge.png" />';
+        document.getElementById("message").innerHTML = "You've caught 30 pokemon. You've earned the Marsh Badge. Wow, what skill!";
+      }
+      else if (caught >= 25){
+        document.getElementById("badges").innerHTML = 
+          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Soulbadge.png" />';
+        document.getElementById("message").innerHTML = "You've caught 25 pokemon. You've earned the Soul Badge. Impressive!";
+      }
+      else if (caught >= 20){
+        document.getElementById("badges").innerHTML = 
+          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Rainbowbadge.png" />';
+        document.getElementById("message").innerHTML = "You've caught 20 pokemon. You've earned the Rainbow Badge. You could be a gym leader!";
+      }
+      else if (caught >= 15){
+        document.getElementById("badges").innerHTML = 
+          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Thunderbadge.png" />';
+        document.getElementById("message").innerHTML = "You've caught 15 pokemon. You've earned the Thunder Badge. Your skill shows promise!";
+      }
+      else if (caught >= 10){
         document.getElementById("badges").innerHTML = 
           '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="boulderbadge" src="./assets/images/badges/Cascadebadge.png" />';
-        document.getElementById("message").innerHTML = "You've caught 10 pokemon. That earned you the Cascade Badge. Keep going trainer!";
+        document.getElementById("message").innerHTML = "You've caught 10 pokemon. You've earned the Cascade Badge. Fantastic!";
       }
-      else if (caught >=5){
+      else if (caught >= 5){
         document.getElementById("badges").innerHTML = 
           '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" />';
-        document.getElementById("message").innerHTML = "You've caught 5 pokemon. That earned you the Boulder Badge. Keep going trainer!";
+        document.getElementById("message").innerHTML = "You've caught 5 pokemon. You've earned the Boulder Badge. Way to go trainer!";
       }
-
     }
     else{
       mismatch = 0;  //resets the number of mismatched characters to zero
