@@ -43,33 +43,164 @@
     //variable to play sound when pokemon is captured
     var capturesound = new Audio('./assets/audio/capturesound.mp3');
 
+    //functions to save us space below!!
+
+    //function to to check the user selection against all letters
+	function checkselection (userguess) {
+	
+		for (i = 0; i < wordlength; i++){
+	      //compares the letter to the user guess
+	      if (word.charAt(i) == userguess){
+
+	      	//code to replace the blankletter with user guess  
+	        wordletters[i] = userguess;
+
+	        //changes status of goodguess to true
+	        goodguess = true; 
+	      }
+    	}
+	 }
+
+    //function to to check if it's a bad guess
+	function checkbadguess () {
+	    if (goodguess == false){
+	      badguess--;
+	      document.getElementById("badguess").innerHTML = badguess;
+	    }
+	 }
+
+	//checks to see if there are any missing letters 
+    function missingletters (){
+	    for (i = 0; i < wordlength; i++){
+	      if (word.charAt(i) != wordletters[i]){
+	        mismatch++;
+	      }
+	    }
+	}
+
+	//checks to see if you lost the game
+    function lostgame () {
+	    if (badguess === 0){
+	      document.getElementById("gamestatus").innerHTML = "Pokemon ran away! Try again.";
+	      
+	      //resets the game with new word, all variable reset
+	      word = wordbank[Math.floor(Math.random() * wordbank.length)]; //gets new word
+	      word = word.toLowerCase(); //changes all letters to lower case
+	      console.log(word); //hint - sends word to console
+	      wordletters.length = word.length; //reset array for word
+	      wordlength = word.length; //resets word length
+	      wordletters = word.split(); //splits word into array
+	      guesses = []; //resets array for guesses
+	      document.getElementById("letterguess").innerHTML = guesses; //prints new array
+
+	      for (i = 0; i < wordlength; i++) { //resets letters in array to blanks
+	        wordletters[i] = "_";
+	      }
+	      document.getElementById("word").innerHTML = wordletters.join(' '); //prints blanks
+	      
+	      badguess = 5; //reset variable 
+	      document.getElementById("badguess").innerHTML = badguess;
+
+	      goodguess = false; //reset variable 
+	      mismatch = 0; //reset variable 
+	    }   
+	} 
+
+   //checks to see if you won the game (ie. if there are no missing letters)
+   function wongame (){
+	    if (mismatch === 0) {
+	      document.getElementById("gamestatus").innerHTML = "You caught a pokemon! <br> Can you catch the next one?";
+	      capturesound.play(); //plays sound
+
+	      //increments the number of pokemon caught
+	      caught++;
+	      document.getElementById("caught").innerHTML = caught;
+
+	      //add pokemon to captured list
+	      captured.push(" " + word);
+
+	      //print the list of pokemon captured
+	      document.getElementById("captured").innerHTML = captured;
+
+	      //resets the game with new word, all variable reset
+	      word = wordbank[Math.floor(Math.random() * wordbank.length)]; //gets new word
+	      word = word.toLowerCase(); //changes all letters to lower case
+	      console.log(word); //hint - sends word to console
+	      wordletters.length = word.length; //reset array for word
+	      wordlength = word.length; //resets word length
+	      wordletters = word.split(); //splits word into array
+	      guesses = []; //resets array for guesses
+	      document.getElementById("letterguess").innerHTML = guesses; //prints new array
+
+	      for (i = 0; i < wordlength; i++) { //resets letters in array to blanks
+	        wordletters[i] = "_";
+	      }
+	      document.getElementById("word").innerHTML = wordletters.join(' '); //prints blanks
+	      
+	      badguess = 5; //reset variable 
+	      document.getElementById("badguess").innerHTML = badguess;
+
+	      goodguess = false; //reset variable 
+	      mismatch = 0; //reset variable 
+
+	      //Adds badges for Pokemon caught!
+	      if (caught >= 40){
+	        document.getElementById("badges").innerHTML = 
+	          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="Rainbowbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="Soulbadge" src="./assets/images/badges/Soulbadge.png" /><img alt="Marshbadge" src="./assets/images/badges/Marshbadge.png" /><img alt="Volcanobadge" src="./assets/images/badges/Volcanobadge.png" /><img alt="Earthbadge" src="./assets/images/badges/Earthbadge.png" />';
+	        document.getElementById("message").innerHTML = "You've caught 40 pokemon. You've earned the Rainbow Badge. You are truly the very best, like no one ever was!";
+	      }
+	      else if (caught >= 35){
+	        document.getElementById("badges").innerHTML = 
+	          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="Rainbowbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="Soulbadge" src="./assets/images/badges/Soulbadge.png" /><img alt="Marshbadge" src="./assets/images/badges/Marshbadge.png" /><img alt="Volcanobadge" src="./assets/images/badges/Volcanobadge.png" />';
+	        document.getElementById("message").innerHTML = "You've caught 35 pokemon. You've earned the Volcano Badge. You are almost there!";
+	      }
+	      else if (caught >= 30){
+	        document.getElementById("badges").innerHTML = 
+	          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="Rainbowbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="Soulbadge" src="./assets/images/badges/Soulbadge.png" /><img alt="Marshbadge" src="./assets/images/badges/Marshbadge.png" />';
+	        document.getElementById("message").innerHTML = "You've caught 30 pokemon. You've earned the Marsh Badge. Wow, what skill!";
+	      }
+	      else if (caught >= 25){
+	        document.getElementById("badges").innerHTML = 
+	          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="Rainbowbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="Soulbadge" src="./assets/images/badges/Soulbadge.png" />';
+	        document.getElementById("message").innerHTML = "You've caught 25 pokemon. You've earned the Soul Badge. Impressive!";
+	      }
+	      else if (caught >= 20){
+	        document.getElementById("badges").innerHTML = 
+	          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="Rainbowbadge" src="./assets/images/badges/Rainbowbadge.png" />';
+	        document.getElementById("message").innerHTML = "You've caught 20 pokemon. You've earned the Rainbow Badge. You could be a gym leader!";
+	      }
+	      else if (caught >= 15){
+	        document.getElementById("badges").innerHTML = 
+	          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" />';
+	        document.getElementById("message").innerHTML = "You've caught 15 pokemon. You've earned the Thunder Badge. Your skill shows promise!";
+	      }
+	      else if (caught >= 10){
+	        document.getElementById("badges").innerHTML = 
+	          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" />';
+	        document.getElementById("message").innerHTML = "You've caught 10 pokemon. You've earned the Cascade Badge. Fantastic!";
+	      }
+	      else if (caught >= 5){
+	        document.getElementById("badges").innerHTML = 
+	          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" />';
+	        document.getElementById("message").innerHTML = "You've caught 5 pokemon. You've earned the Boulder Badge. Way to go trainer!";
+	      }
+	    }
+	    else{
+	      mismatch = 0;  //resets the number of mismatched characters to zero
+	    }
+	}
+
   //game starts when user types into the text field     
   document.onkeyup = function(event) {
 
     // Determines which key was pressed.
     var userguess = event.key; 
-    useguess = userguess.toLowerCase(); //converts user choice to lower case letters
+    userguess = userguess.toLowerCase(); //converts user choice to lower case letters
     guesses.push(" " + userguess); //adds to list of letters guessed
     document.getElementById("letterguess").innerHTML = guesses;
 
-    //loop to check the user selection against all letters  
-    for (i = 0; i < wordlength; i++){
-      //compares the letter to the user guess
-      if (word.charAt(i) == userguess){
-
-        //changes status of goodguess to true
-        goodguess = true; 
-
-        //code to replace the blankletter with user guess  
-        wordletters[i] = userguess;
-      }
-    }
-
-    //if the goodguess variable was not changed to true, this adds to the badguess total
-    if (goodguess == false){
-      badguess--;
-        document.getElementById("badguess").innerHTML = badguess;
-    }
+    checkselection (userguess);
+    checkbadguess ();
     
     //prints the word with the letter now replaced!
     document.getElementById("word").innerHTML = wordletters.join(' ');
@@ -77,119 +208,8 @@
     //resets good guess indicator
     goodguess = false; 
 
-    //checks to see if you lost the game
-    if (badguess === 0){
-      document.getElementById("gamestatus").innerHTML = "Pokemon ran away! Try again.";
-      
-      //resets the game with new word, all variable reset
-      word = wordbank[Math.floor(Math.random() * wordbank.length)]; //gets new word
-      word = word.toLowerCase(); //changes all letters to lower case
-      console.log(word); //hint - sends word to console
-      wordletters.length = word.length; //reset array for word
-      wordlength = word.length; //resets word length
-      wordletters = word.split(); //splits word into array
-      guesses = []; //resets array for guesses
-      document.getElementById("letterguess").innerHTML = guesses; //prints new array
-
-      for (i = 0; i < wordlength; i++) { //resets letters in array to blanks
-        wordletters[i] = "_";
-      }
-      document.getElementById("word").innerHTML = wordletters.join(' '); //prints blanks
-      
-      badguess = 5; //reset variable 
-      document.getElementById("badguess").innerHTML = badguess;
-
-      goodguess = false; //reset variable 
-      mismatch = 0; //reset variable 
-    }    
-
-    //checks to see if there are any missing letters 
-    for (i = 0; i < wordlength; i++){
-      if (word.charAt(i) != wordletters[i]){
-        mismatch++;
-      }
-    }
-
-    //checks to see if you won the game (ie. if there are no missing letters)
-    if (mismatch === 0) {
-      document.getElementById("gamestatus").innerHTML = "You caught a pokemon! <br> Can you catch the next one?";
-      capturesound.play(); //plays sound
-
-      //increments the number of pokemon caught
-      caught++;
-      document.getElementById("caught").innerHTML = caught;
-
-      //add pokemon to captured list
-      captured.push(" " + word);
-
-      //print the list of pokemon captured
-      document.getElementById("captured").innerHTML = captured;
-
-      //resets the game with new word, all variable reset
-      word = wordbank[Math.floor(Math.random() * wordbank.length)]; //gets new word
-      word = word.toLowerCase(); //changes all letters to lower case
-      console.log(word); //hint - sends word to console
-      wordletters.length = word.length; //reset array for word
-      wordlength = word.length; //resets word length
-      wordletters = word.split(); //splits word into array
-      guesses = []; //resets array for guesses
-      document.getElementById("letterguess").innerHTML = guesses; //prints new array
-
-      for (i = 0; i < wordlength; i++) { //resets letters in array to blanks
-        wordletters[i] = "_";
-      }
-      document.getElementById("word").innerHTML = wordletters.join(' '); //prints blanks
-      
-      badguess = 5; //reset variable 
-      document.getElementById("badguess").innerHTML = badguess;
-
-      goodguess = false; //reset variable 
-      mismatch = 0; //reset variable 
-
-      //Adds badges for Pokemon caught!
-      if (caught >= 40){
-        document.getElementById("badges").innerHTML = 
-          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="Rainbowbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="Soulbadge" src="./assets/images/badges/Soulbadge.png" /><img alt="Marshbadge" src="./assets/images/badges/Marshbadge.png" /><img alt="Volcanobadge" src="./assets/images/badges/Volcanobadge.png" /><img alt="Earthbadge" src="./assets/images/badges/Earthbadge.png" />';
-        document.getElementById("message").innerHTML = "You've caught 40 pokemon. You've earned the Rainbow Badge. You are truly the very best, like no one ever was!";
-      }
-      else if (caught >= 35){
-        document.getElementById("badges").innerHTML = 
-          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="Rainbowbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="Soulbadge" src="./assets/images/badges/Soulbadge.png" /><img alt="Marshbadge" src="./assets/images/badges/Marshbadge.png" /><img alt="Volcanobadge" src="./assets/images/badges/Volcanobadge.png" />';
-        document.getElementById("message").innerHTML = "You've caught 35 pokemon. You've earned the Volcano Badge. You are almost there!";
-      }
-      else if (caught >= 30){
-        document.getElementById("badges").innerHTML = 
-          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="Rainbowbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="Soulbadge" src="./assets/images/badges/Soulbadge.png" /><img alt="Marshbadge" src="./assets/images/badges/Marshbadge.png" />';
-        document.getElementById("message").innerHTML = "You've caught 30 pokemon. You've earned the Marsh Badge. Wow, what skill!";
-      }
-      else if (caught >= 25){
-        document.getElementById("badges").innerHTML = 
-          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="Rainbowbadge" src="./assets/images/badges/Rainbowbadge.png" /><img alt="Soulbadge" src="./assets/images/badges/Soulbadge.png" />';
-        document.getElementById("message").innerHTML = "You've caught 25 pokemon. You've earned the Soul Badge. Impressive!";
-      }
-      else if (caught >= 20){
-        document.getElementById("badges").innerHTML = 
-          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" /><img alt="Rainbowbadge" src="./assets/images/badges/Rainbowbadge.png" />';
-        document.getElementById("message").innerHTML = "You've caught 20 pokemon. You've earned the Rainbow Badge. You could be a gym leader!";
-      }
-      else if (caught >= 15){
-        document.getElementById("badges").innerHTML = 
-          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" /><img alt="Thunderbadge" src="./assets/images/badges/Thunderbadge.png" />';
-        document.getElementById("message").innerHTML = "You've caught 15 pokemon. You've earned the Thunder Badge. Your skill shows promise!";
-      }
-      else if (caught >= 10){
-        document.getElementById("badges").innerHTML = 
-          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" /><img alt="Cascadebadge" src="./assets/images/badges/Cascadebadge.png" />';
-        document.getElementById("message").innerHTML = "You've caught 10 pokemon. You've earned the Cascade Badge. Fantastic!";
-      }
-      else if (caught >= 5){
-        document.getElementById("badges").innerHTML = 
-          '<img alt="boulderbadge" src="./assets/images/badges/Boulderbadge.png" />';
-        document.getElementById("message").innerHTML = "You've caught 5 pokemon. You've earned the Boulder Badge. Way to go trainer!";
-      }
-    }
-    else{
-      mismatch = 0;  //resets the number of mismatched characters to zero
-    }
+    lostgame ();
+    missingletters ();
+    wongame();
 
 }
